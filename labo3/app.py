@@ -2,6 +2,7 @@
 import streamlit as st
 import requests
 import pandas as pd
+from st_aggrid import AgGrid
 
 st.title("Affichage de données depuis Snowflake")
 
@@ -19,10 +20,11 @@ def get_data_from_api():
         return None
 
 # Bouton pour récupérer les données
-if st.button("Récupérer les données depuis Snowflake"):
-    data = get_data_from_api()
-    if data:
-        # Convertit les données JSON en DataFrame Pandas
-        df = pd.read_json(data, orient='records')
-        st.write("Données récupérées depuis Snowflake :")
-        st.write(df)
+data = get_data_from_api()
+if data:
+    # Convertit les données JSON en DataFrame Pandas
+    df = pd.read_json(data, orient='records')
+    st.write("Données récupérées depuis Snowflake :")
+    AgGrid(df)
+
+    #st.write(df)
