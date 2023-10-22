@@ -74,6 +74,7 @@ const Profile = () => {
 
   const handleLogout = async () => {
     Cookies.remove('jwt');
+    localStorage.clear();
     navigate('/login')
   };
 
