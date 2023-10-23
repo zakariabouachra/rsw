@@ -21,7 +21,7 @@ const fetchTableDescription = () => {
       const tableDescription = response.data.table_description;
       if (tableDescription !== undefined) {
         setTableDescription(tableDescription);
-        localStorage.setItem(`table_description_${currentTableName}`, JSON.stringify(tableDescription));
+        localStorage.setItem(`table_description_${currentDatabaseName}_${currentSchemaName}_${currentTableName}`, JSON.stringify(tableDescription));
       } else {
         console.error("tableDescription est indéfini");
       }
@@ -32,7 +32,7 @@ const fetchTableDescription = () => {
 };
 
 useEffect(() => {
-  const storedTableDescription = localStorage.getItem(`table_description_${currentDatabaseName}`);
+  const storedTableDescription = localStorage.getItem(`table_description_${currentDatabaseName}_${currentSchemaName}_${currentTableName}`);
 
   if (storedTableDescription !== undefined) {
     const tableDescription = JSON.parse(storedTableDescription);

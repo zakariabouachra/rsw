@@ -1,0 +1,47 @@
+
+.hover-link {
+    color: gray;
+    text-decoration: none;
+    font-weight: normal;
+    margin-left: 8px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.hover-link:hover {
+    color: black;
+    font-weight: bold;
+}
+
+.textField {
+    margin-bottom: 16px;
+    width: 500px;
+    margin-top: 5px;
+}
+
+.title {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.addButton {
+    margin-right: 10px;
+}
+
+
+.dialogContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 500px;
+}
+
+.createButton {
+    width: 100px;
+}
+
+.editbutton {
+    margin-right: 10px;
+}
+.deletebutton {
+    margin-right: 10px;
+}

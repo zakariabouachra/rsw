@@ -1,61 +1,41 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import {
+  AddCircleOutline
+} from '@mui/icons-material';
 import {
   Avatar,
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  FormControl,
+  Grid,
+  InputLabel,
   List,
   ListItemAvatar,
   ListItemButton,
   ListItemText,
-  Typography,
-  Button,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  TextField,
-  Select,
   MenuItem,
-  FormControl,
-  InputLabel,
-  Snackbar,
-  Alert,
-  DialogActions,
-  Grid
+  Select,
+  Typography
 } from '@mui/material';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import AddDatabase from './addDataBase';
+import 'assets/css/styles.css';
 
-const styles = {
-  dialogContent: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    with: '500px'
-  },
-  textField: {
-    marginBottom: '16px',
-    width: '500px',
-  },
-  createButton: {
-    width: '100px',
-  },
-  title: {
-    textAlign: 'center',
-    fontWeight: 'bold',
-  },
-};
+
 
 const DatabaseDefault = () => {
   const [databases, setDatabases] = useState([]);
   const [openDialog, setOpenDialog] = useState(false);
-  const [newDatabaseName, setNewDatabaseName] = useState('');
   const [useWarehouse, setUseWarehouse] = useState(false);
   const [selectedWarehouse, setSelectedWarehouse] = useState('');
   const [warehouseList, setWarehouseList] = useState([]);
-  const [operationStatus, setOperationStatus] = useState(null);
-  const [messageErreur, setmessageErreur] = useState('');
-  const [openSnackBar, setOpenSnackBar] = useState(false);
   const [loadingAlertOpen, setLoadingAlertOpen] = useState(true);
   const [showUseDialog, setShowUseDialog] = useState(false);
-  
+
 
   const fetchDatabases = () => {
     axios
@@ -117,39 +97,7 @@ const DatabaseDefault = () => {
     setOpenDialog(false);
   };
 
-  const handleCreateClick = () => {
-    if (newDatabaseName.trim() === '') {
-      return;
-    }
-
-    // Créez un objet pour les données à envoyer au backend
-    const data = {
-      databaseName: newDatabaseName,
-      useWarehouse: useWarehouse,
-      selectedWarehouse: selectedWarehouse,
-    };
-
-    // Utilisez Axios pour envoyer la demande d'insertion au backend
-    axios
-      .post('http://localhost:5000/databases/insert', data)
-      .then((response) => {
-        const databaseData = response.data.databases;
-        setDatabases(databaseData);
-        localStorage.setItem('databases', JSON.stringify(databaseData));
-        setOperationStatus('success');
-        setOpenSnackBar(true);
-        handleCloseDialog();
-      })
-      .catch((error) => {
-        console.error(error);
-        setmessageErreur(error.response.data.error);
-        setOperationStatus('error');
-        setOpenSnackBar(true);
-      });
-  };
-
-  
-
+ 
   const handleUseWarehouseClick = () => {
     setUseWarehouse(true);
     localStorage.setItem('useWarehouse', JSON.stringify(true));
@@ -202,21 +150,32 @@ const DatabaseDefault = () => {
       </div>
       <div style={{ flex: 1 }}>
         <Button variant="contained" color="primary" onClick={handleOpenDialog}>
-          + Database
+          <AddCircleOutline /> Database
         </Button>
       </div>
+
+      <AddDatabase
+        openDialog={openDialog}
+        setDatabases={setDatabases}
+        setOpenDialog={setOpenDialog}
+        useWarehouse={useWarehouse}
+        selectedWarehouse={selectedWarehouse}
+      />
+
+
+
      {/* Dialogue d'alerte au chargement */}
       <Dialog open={!useWarehouse && loadingAlertOpen}>
         <DialogTitle
           style={{
-            ...styles.title,
             backgroundColor: 'red', // Couleur de fond de l'en-tête du dialogue
             color: 'white', // Couleur du texte de l'en-tête du dialogue
           }}
+          className="title"
         >
           Message Alerte
         </DialogTitle>
-        <DialogContent style={styles.dialogContent}>
+        <DialogContent className="dialogContent">
           <Typography style={{
               fontSize: '16px', // Taille de la police
               fontWeight: 'bold'            }}>
@@ -228,10 +187,10 @@ const DatabaseDefault = () => {
                 variant="contained"
                 color="primary"
                 style={{
-                  ...styles.createButton,
                   backgroundColor: 'green', // Couleur de fond du bouton "Oui"
                   color: 'white', // Couleur du texte du bouton "Oui"
                 }}
+                className="createButton"
                 onClick={handleUseWarehouseClick}
               >
                 Oui
@@ -242,10 +201,10 @@ const DatabaseDefault = () => {
                 variant="contained"
                 color="primary"
                 style={{
-                  ...styles.createButton,
                   backgroundColor: 'red', // Couleur de fond du bouton "Non"
                   color: 'white', // Couleur du texte du bouton "Non"
                 }}
+                className="createButton"
                 onClick={handlenotUseWarehouseClick}
               >
                 Non
@@ -256,50 +215,21 @@ const DatabaseDefault = () => {
       </Dialog>
 
 
-      {/* Dialogue modal pour ajouter une base de données */}
-      <Dialog open={openDialog} onClose={handleCloseDialog}>
-        <DialogTitle style={styles.title}>Ajouter une base de données</DialogTitle>
-        <DialogContent style={styles.dialogContent}>
-          <TextField
-            label="Nom de la base de données"
-            variant="outlined"
-            fullWidth
-            margin="normal"
-            style={styles.textField}
-            value={newDatabaseName}
-            onChange={(e) => setNewDatabaseName(e.target.value)}
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleCloseDialog} color="primary">
-            Annuler
-          </Button>
-          <Button
-            variant="contained"
-            color="primary"
-            style={styles.createButton}
-            onClick={handleCreateClick}
-          >
-            Créer
-          </Button>
-        </DialogActions>
-      </Dialog>
-
       
 
       {/* Dialogue modal pour utiliser un entrepôt */}
       <Dialog open={showUseDialog} onClose={handleCloseDialog} >
         <DialogTitle
           style={{
-            ...styles.title,
             backgroundColor: 'red', // Couleur de fond de l'en-tête du dialogue
             color: 'white', // Couleur du texte de l'en-tête du dialogue
             marginBottom: '10px', // Ajout d'espace en bas du titre
           }}
+          className="title"
         >
           Utiliser un entrepôt
         </DialogTitle>
-        <DialogContent style={{ ...styles.dialogContent }}>
+        <DialogContent className="dialogContent">
           <FormControl style={{ width: '100%' }}>
             <InputLabel htmlFor="select-warehouse">
               Sélectionnez un entrepôt
@@ -333,10 +263,10 @@ const DatabaseDefault = () => {
             variant="contained"
             color="primary"
             style={{
-              ...styles.createButton,
               backgroundColor: 'green', // Couleur de fond du bouton "Use"
               color: 'white', // Couleur du texte du bouton "Use"
             }}
+            className="createButton"
             onClick={handleUseDialog}
           >
             Use
@@ -345,24 +275,6 @@ const DatabaseDefault = () => {
       </Dialog>
 
 
-
-      {/* Snackbar pour afficher le résultat de l'opération */}
-      <Snackbar
-        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
-        open={openSnackBar}
-        autoHideDuration={6000}
-        onClose={() => setOpenSnackBar(false)}
-      >
-        {operationStatus === 'success' ? (
-          <Alert severity="success" sx={{ width: '100%' }}>
-            Base de données créée avec succès !
-          </Alert>
-        ) : (
-          <Alert severity="error" sx={{ width: '100%' }}>
-            Erreur : {messageErreur}
-          </Alert>
-        )}
-      </Snackbar>
     </div>
   );
 };
