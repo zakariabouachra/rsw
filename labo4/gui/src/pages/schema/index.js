@@ -73,7 +73,7 @@ const SchemaDetail = () => {
 
   const fetchTables = () => {
     axios
-      .get(`http://localhost:5000/database/${currentDatabaseName}/schema/${currentSchemaName}/tables`)
+      .get(`http://localhost:5000/read/database/${currentDatabaseName}/schema/${currentSchemaName}/tables`)
       .then((response) => {
         console.log(response.data);
         const tableData = response.data.tables;

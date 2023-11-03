@@ -32,7 +32,7 @@ import 'assets/css/styles.css';
     const handleDeleteWarehouse = () => {
       setSubmitting(true);
       axios
-        .delete(`http://localhost:5000/warehouses/delete/${currentWarehouseName}`)
+        .delete(`http://localhost:5000/del/warehouses/delete/${currentWarehouseName}`)
         .then((response) => {
           const warehouseData = response.data.warehouses;
           localStorage.setItem('warehouses', JSON.stringify(warehouseData));

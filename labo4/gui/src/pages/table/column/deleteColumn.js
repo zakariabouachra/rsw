@@ -30,7 +30,7 @@ const DeleteColumn = ({ openDeleteColumnDialog, setOpenDeleteColumnDialog, dbcol
         setSubmitting(true);
 
         axios
-        .delete(`http://localhost:5000/database/${currentDatabaseName}/schema/${currentSchemaName}/table/${currentTableName}/column/${columnToDelete.name}/delete`)
+        .delete(`http://localhost:5000/del/database/${currentDatabaseName}/schema/${currentSchemaName}/table/${currentTableName}/column/${columnToDelete.name}/delete`)
         .then((response) => {
           const columnData = response.data.columns.map((column) => ({
             name: column.name,

@@ -25,7 +25,7 @@ import 'assets/css/styles.css';
     const handleDeleteSchema = () => {
       setSubmitting(true);
       axios
-        .delete(`http://localhost:5000/database/${currentDatabaseName}/schema/${currentSchemaName}/delete`)
+        .delete(`http://localhost:5000/del/database/${currentDatabaseName}/schema/${currentSchemaName}/delete`)
         .then((response) => {
           const schemaData = response.data.schemas; 
           localStorage.setItem(`schemas_${currentDatabaseName}`, JSON.stringify(schemaData));       

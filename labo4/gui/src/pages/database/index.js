@@ -39,7 +39,7 @@ const DatabaseDefault = () => {
 
   const fetchDatabases = () => {
     axios
-      .post('http://localhost:5000/databases', {
+      .post('http://localhost:5000/read/databases', {
         selectedWarehouse: selectedWarehouse,
         useWarehouse: useWarehouse,
       })
@@ -77,7 +77,7 @@ const DatabaseDefault = () => {
     } else {
       // Effectuez la requête pour récupérer la liste des entrepôts
       axios
-        .get('http://localhost:5000/warehouses')
+        .get('http://localhost:5000/read/warehouses')
         .then((response) => {
           const warehouseData = response.data.warehouses;
           setWarehouseList(warehouseData);

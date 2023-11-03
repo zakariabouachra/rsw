@@ -17,7 +17,7 @@ import { useNavigate, useParams } from 'react-router-dom';
     const navigate = useNavigate();
   
     // États pour le menu d'action
-    const [currentTableName] = useState(tableName);
+    const [currentTableName, setCurrentTableName] = useState(tableName);
     const [currentDatabaseName] = useState(databaseName);
     const [currentSchemaName] = useState(schemaName);
     const [operationStatus, setOperationStatus] = useState(null);
@@ -34,20 +34,22 @@ import { useNavigate, useParams } from 'react-router-dom';
   
     const handleSaveEdit = () => {
       const data = {
-        newTableName: newTableName,
+        newTableName: newTableName.toUpperCase(),
       };
       setSubmitting(true);
 
       axios
         .put(
-          `http://localhost:5000/database/${currentDatabaseName}/schema/${currentSchemaName}/table/${currentTableName}/edit`,
+          `http://localhost:5000/update/database/${currentDatabaseName}/schema/${currentSchemaName}/table/${currentTableName}/edit`,
           data
         )
         .then((response) => {
           const tableData = response.data.tables;
+          console.log(tableData);
           localStorage.setItem(`tables_${currentDatabaseName}_${currentSchemaName}`, JSON.stringify(tableData));
           handleCloseEditDialog();
-          navigate(`/database/${currentDatabaseName}/${currentSchemaName}/${newTableName}`);
+          setCurrentTableName(newTableName.toUpperCase());
+          navigate(`/database/${currentDatabaseName}/${currentSchemaName}/${newTableName.toUpperCase()}`);
           setOperationStatus('success');
           setmessageSuccess(response.data.message);
           setOpenSnackBar(true);

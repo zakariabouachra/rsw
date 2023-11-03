@@ -72,7 +72,7 @@ const DatabaseDetail = () => {
 
   const fetchSchemas = () => {
     axios
-      .get(`http://localhost:5000/database/${currentDatabaseName}/schemas`)
+      .get(`http://localhost:5000/read/database/${currentDatabaseName}/schemas`)
       .then((response) => {
         console.log(response.data);
         const schemaData = response.data.schemas;

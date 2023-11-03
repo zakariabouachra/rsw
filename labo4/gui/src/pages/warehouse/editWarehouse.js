@@ -38,7 +38,7 @@ const EditWarehouse = ({openEditDialog, setOpenEditDialog , setNewWarehouseName,
   const handleSaveEdit = () => {
     setSubmitting(true);
     axios
-      .put(`http://localhost:5000/warehouses/update/${currentWarehouseName}`,{WarehouseName :newWarehouseName.toUpperCase()})
+      .put(`http://localhost:5000/update/warehouses/update/${currentWarehouseName}`,{WarehouseName :newWarehouseName.toUpperCase()})
       .then((response) => {
         const warehouseData = response.data.warehouses;
         localStorage.setItem('warehouses', JSON.stringify(warehouseData));

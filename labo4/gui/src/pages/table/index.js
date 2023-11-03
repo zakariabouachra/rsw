@@ -51,7 +51,7 @@ const TableDetail = () => {
   const fetchColumnsAndData = () => {
       axios
         .get(
-          `http://localhost:5000/database/${currentDatabaseName}/schema/${currentSchemaName}/table/${currentTableName}/columns`
+          `http://localhost:5000/read/database/${currentDatabaseName}/schema/${currentSchemaName}/table/${currentTableName}/columns`
         )
         .then((response) => {
           const columnData = response.data.columns.map((column) => ({
@@ -74,7 +74,7 @@ const TableDetail = () => {
 
     axios
       .get(
-        `http://localhost:5000/database/${currentDatabaseName}/schema/${currentSchemaName}/table/${currentTableName}/data`
+        `http://localhost:5000/read/database/${currentDatabaseName}/schema/${currentSchemaName}/table/${currentTableName}/data`
       )
       .then((response) => {
         const tableData = response.data.data;
@@ -196,6 +196,7 @@ const TableDetail = () => {
         currentDatabaseName={currentDatabaseName}
         currentSchemaName={currentSchemaName}
         currentTableName={currentTableName} 
+        setData={setData}
         />}
         {activeTab === 2 && <DataShow data={data} dbcolumns={dbcolumns}/>}
       </div>

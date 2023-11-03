@@ -14,7 +14,7 @@ const TableAnalyse = () => {
 const fetchTableDescription = () => {
   axios
     .get(
-      `http://localhost:5000/database/${currentDatabaseName}/schema/${currentSchemaName}/table/${currentTableName}/description`
+      `http://localhost:5000/analyse/database/${currentDatabaseName}/schema/${currentSchemaName}/table/${currentTableName}/description`
     )
     .then((response) => {
       console.log(response.data.table_description);

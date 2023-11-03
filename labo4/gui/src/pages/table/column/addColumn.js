@@ -95,7 +95,7 @@ const AddColumn = ({openAddColumnDialog, setOpenAddColumnDialog, setdbColumns, s
     } else {
       setSubmitting(true);
       axios
-        .post(`http://localhost:5000/database/${currentDatabaseName}/schema/${currentSchemaName}/table/${currentTableName}/columns/insert`, {
+        .post(`http://localhost:5000/insert/database/${currentDatabaseName}/schema/${currentSchemaName}/table/${currentTableName}/columns/insert`, {
           columns: columnsData,
         })
         .then((response) => {

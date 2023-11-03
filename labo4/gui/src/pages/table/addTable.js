@@ -101,7 +101,7 @@ const AddTable = ({openTableDialog, setOpenTableDialog, setTables}) => {
     setCreateTable(true);
 
     axios
-      .post(`http://localhost:5000/database/${currentDatabaseName}/schema/${currentSchemaName}/tables/insert`, {
+      .post(`http://localhost:5000/insert/database/${currentDatabaseName}/schema/${currentSchemaName}/tables/insert`, {
         tableName: newTableName,
         columns: columnsData,
       })
@@ -130,7 +130,7 @@ return(
       {/* Dialogue modal pour ajouter une table */}
       <Dialog open={openTableDialog} onClose={handleCloseTableDialog} fullWidth maxWidth="md">
         <DialogTitle className="title">Ajouter une table</DialogTitle>
-        <DialogContent className="dialogContent">
+        <DialogContent >
           <TextField
             label="Nom de la table"
             variant="outlined"
@@ -225,7 +225,6 @@ return(
           <Button
             variant="contained"
             color="primary"
-            className="createButton"
             onClick={handleCreateTableClick}
             disableElevation
             disabled={isCreateTable}

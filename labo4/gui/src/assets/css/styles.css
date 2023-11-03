@@ -32,16 +32,16 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 500px;
+    padding: 5px;
 }
 
 .createButton {
-    width: 100px;
+   padding: 5px;
 }
 
 .editbutton {
     margin-right: 10px;
 }
 .deletebutton {
-    margin-right: 10px;
+    margin-left: 10px;
 }

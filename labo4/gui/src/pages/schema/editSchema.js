@@ -40,7 +40,7 @@ const EditSchema = ({ openEditDialog, setOpenEditDialog, newNameSchema, setNewSc
     const handleSaveEdit = () => {
       setSubmitting(true);
       axios
-        .put(`http://localhost:5000/database/${currentDatabaseName}/schema/${currentSchemaName}/edit`, {
+        .put(`http://localhost:5000/update/database/${currentDatabaseName}/schema/${currentSchemaName}/edit`, {
           newSchemaName: newNameSchema,
         })
         .then((response) => {

@@ -28,13 +28,11 @@ import { useNavigate } from 'react-router-dom';
       setSubmitting(true);
 
       axios
-        .delete(`http://localhost:5000/database/${currentDatabaseName}/schema/${currentSchemaName}/table/${currentTableName}/delete`) 
+        .delete(`http://localhost:5000/del/database/${currentDatabaseName}/schema/${currentSchemaName}/table/${currentTableName}/delete`) 
         .then((response) => {
           const table = response.data.tables;
           localStorage.setItem(`tables_${currentDatabaseName}_${currentSchemaName}`, JSON.stringify(table));
-          localStorage.removeItem(`table_description_${currentDatabaseName}_${currentSchemaName}_${currentTableName}`);
-          localStorage.removeItem(`columns_${currentDatabaseName}_${currentSchemaName}_${currentTableName}`);
-          localStorage.removeItem(`data_${currentDatabaseName}_${currentSchemaName}_${currentTableName}`);
+          localStorage.clear();
           navigate(`/database/${currentDatabaseName}/${currentSchemaName}`); 
           setmessageSuccess(response.data.message);
           setOperationStatus('success');

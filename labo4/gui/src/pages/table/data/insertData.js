@@ -43,7 +43,7 @@ import { useParams } from 'react-router-dom';
       }
       setSubmitting(true);
       axios
-        .post(`http://localhost:5000/database/${currentDatabaseName}/schema/${currentSchemaName}/table/${currentTableName}/data/insert`, newData)
+        .post(`http://localhost:5000/insert/database/${currentDatabaseName}/schema/${currentSchemaName}/table/${currentTableName}/data/insert`, newData)
         .then((response) => {
           const tableData = response.data.data;
           setData(tableData);

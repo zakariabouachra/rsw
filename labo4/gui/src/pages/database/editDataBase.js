@@ -47,7 +47,7 @@ const handleSaveEdit = () => {
   };
 
   axios
-    .put(`http://localhost:5000/database/${currentDatabaseName}/edit`, updatedDatabaseData) 
+    .put(`http://localhost:5000/update/database/${currentDatabaseName}/edit`, updatedDatabaseData) 
     .then((response) => {
       const databaseData = response.data.databases;
       localStorage.setItem('databases', JSON.stringify(databaseData));

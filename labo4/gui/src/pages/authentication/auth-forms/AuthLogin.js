@@ -63,7 +63,7 @@ const AuthLogin = () => {
         })}
         onSubmit={async (values, { setStatus, setSubmitting }) => {
           try {
-            const response = await axios.post('http://localhost:5000/login', values);
+            const response = await axios.post('http://localhost:5000/auth/login', values);
           
             if (response.data.status === 'success') {
 

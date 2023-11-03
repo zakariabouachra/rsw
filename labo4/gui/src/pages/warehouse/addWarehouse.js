@@ -33,7 +33,7 @@ const AddWarehouse = ({setWarehouses, setOpenDialog, openDialog}) => {
     }
     setSubmitting(true);
     axios
-      .post('http://localhost:5000/warehouses/insert', { warehouseName: newWarehouseName.toUpperCase() })
+      .post('http://localhost:5000/insert/warehouses/insert', { warehouseName: newWarehouseName.toUpperCase() })
       .then((response) => {
         setSubmitting(false);
         const warehouseData = response.data.warehouses;

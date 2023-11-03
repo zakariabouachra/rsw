@@ -45,7 +45,7 @@ const AddSchema = ({openSchemaDialog, setOpenSchemaDialog, setSchemas}) => {
   
     // Envoyez une requête POST pour insérer le nouveau schéma
     axios
-      .post('http://localhost:5000/schemas/insert', newSchemaData) // Assurez-vous d'ajuster l'URL en fonction de votre API
+      .post('http://localhost:5000/insert/schemas/insert', newSchemaData) // Assurez-vous d'ajuster l'URL en fonction de votre API
       .then((response) => {
         const schemaData = response.data.schemas; 
         setSchemas(schemaData);
@@ -82,23 +82,22 @@ const AddSchema = ({openSchemaDialog, setOpenSchemaDialog, setSchemas}) => {
             value={newSchemaName}
             onChange={(e) => setNewSchemaName(e.target.value)}
           />
-          <DialogActions>
-            <Button onClick={handleCloseSchemaDialog} color="primary" disableElevation 
-            disabled={isSubmitting}>
-              Annuler
-            </Button>
-            <Button
-              variant="contained"
-              color="primary"
-              className="createButton"
-              onClick={handleCreateSchemaClick}
-              disableElevation 
-              disabled={isSubmitting}
-            >
-              Créer Schéma
-            </Button>
-          </DialogActions>
         </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseSchemaDialog} color="primary" disableElevation 
+          disabled={isSubmitting}>
+            Annuler
+          </Button>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={handleCreateSchemaClick}
+            disableElevation 
+            disabled={isSubmitting}
+          >
+            Créer
+          </Button>
+        </DialogActions>
       </Dialog>
 
        {/* Snackbar pour afficher le résultat de l'opération */}

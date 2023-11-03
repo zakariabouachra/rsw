@@ -35,7 +35,7 @@ import 'assets/css/styles.css'
     const handleDeleteDatabase = () => {
       setSubmitting(true);
       axios
-        .delete(`http://localhost:5000/database/${currentDatabaseName}/delete`) 
+        .delete(`http://localhost:5000/del/database/${currentDatabaseName}/delete`) 
         .then((response) => {
           const databaseData = response.data.databases;
           localStorage.clear();

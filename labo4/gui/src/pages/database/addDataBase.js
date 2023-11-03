@@ -42,7 +42,7 @@ const AddDatabase = ({openDialog, setOpenDialog, setDatabases, useWarehouse, sel
 
     // Utilisez Axios pour envoyer la demande d'insertion au backend
     axios
-      .post('http://localhost:5000/databases/insert', data)
+      .post('http://localhost:5000/insert/databases/insert', data)
       .then((response) => {
         const databaseData = response.data.databases;
         setDatabases(databaseData);

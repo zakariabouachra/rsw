@@ -27,7 +27,7 @@ const WarehouseDefault = () => {
       setWarehouses(JSON.parse(cachedwarehouse));
     } else {
       axios
-        .get('http://localhost:5000/warehouses')
+        .get('http://localhost:5000/read/warehouses')
         .then((response) => {
           const warehouseData = response.data.warehouses;
           setWarehouses(warehouseData);

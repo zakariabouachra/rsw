@@ -14,9 +14,10 @@ import {
 } from '@mui/material';
 import DeleteColumn from './deleteColumn';
 import 'assets/css/styles.css';
+import EditColumn from './editColumn';
 
 
-const ColumnShow = ({ dbcolumns , setdbColumns, currentDatabaseName, currentSchemaName, currentTableName}) => {
+const ColumnShow = ({ dbcolumns , setdbColumns, currentDatabaseName, currentSchemaName, currentTableName, setData}) => {
     const [index, setIndex] = useState(null);
     
 
@@ -25,9 +26,11 @@ const ColumnShow = ({ dbcolumns , setdbColumns, currentDatabaseName, currentSche
     });
 
     const [openDeleteColumnDialog, setOpenDeleteColumnDialog] = useState(false);
+    const [openEditColumnDialog, setOpenEditColumnDialog] = useState(false);
 
-    const handleEditColumn = () => {
-        // Gérer l'édition de la colonne
+    const handleEditColumn = (index) => {
+        setIndex(index);
+        setOpenEditColumnDialog(true);
     };
 
     const handleOpenDeleteColumnDialog = (index) => {
@@ -65,6 +68,19 @@ const ColumnShow = ({ dbcolumns , setdbColumns, currentDatabaseName, currentSche
                 </Table>
             </TableContainer>
 
+            <EditColumn
+                openEditColumnDialog={openEditColumnDialog}
+                setOpenEditColumnDialog={setOpenEditColumnDialog}
+                columnData={sortedColumns}
+                columnIndexToEdit={index}
+                currentDatabaseName={currentDatabaseName}
+                currentTableName={currentTableName}
+                currentSchemaName={currentSchemaName}
+                currentColumnName={sortedColumns[index]}
+                setdbColumns={setdbColumns}
+                setData={setData}
+            />
+
             <DeleteColumn
                 openDeleteColumnDialog={openDeleteColumnDialog}
                 setOpenDeleteColumnDialog={setOpenDeleteColumnDialog}
@@ -74,7 +90,10 @@ const ColumnShow = ({ dbcolumns , setdbColumns, currentDatabaseName, currentSche
                 currentDatabaseName={currentDatabaseName}
                 currentTableName={currentTableName}
                 currentSchemaName={currentSchemaName}
+                setData={setData}
             />
+
+            
         </div>
     );
 };
